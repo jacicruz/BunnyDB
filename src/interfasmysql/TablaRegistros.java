@@ -36,7 +36,7 @@ public class TablaRegistros extends JFrame {
 
         // Crear el panel principal con un color de fondo morado claro
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(new Color(200, 180, 255)); // Morado claro
+        panel.setBackground(new Color(255,237,139)); // Morado claro
 
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);

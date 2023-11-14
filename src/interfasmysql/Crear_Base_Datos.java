@@ -14,7 +14,9 @@ public class Crear_Base_Datos extends JPanel {
 
         // Crear un panel para los componentes de creación de base de datos con disposición BoxLayout vertical
         JPanel panelCreacion = new JPanel();
+       panelCreacion.setBackground(new Color(120,170,255));
         panelCreacion.setLayout(new BoxLayout(panelCreacion, BoxLayout.Y_AXIS));
+       
 
         // Crear etiqueta y campo de texto para el nombre de la base de datos
         JLabel lblNombreBd = new JLabel("Nombre de la Base de Datos:");

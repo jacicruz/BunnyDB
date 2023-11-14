@@ -32,7 +32,7 @@ public class Inicio extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panelIzquierdo = new JPanel();
-        panelIzquierdo.setBackground(new Color(100, 149, 237)); // Azul acero
+        panelIzquierdo.setBackground(new Color(150, 180, 230)); // Azul acero
         panelDerecho.setBackground(new Color(173, 216, 230)); // Azul pálido
 
         panelDerecho.setOpaque(true);
@@ -104,6 +104,7 @@ public class Inicio extends JFrame {
         textPane.setText("<html><p style='font-size: 18px; color: black; text-align: center;'>Bienvenido a esta aplicación MySQL.</p></html>");
         textPane.setEditable(false);
         panelDerecho.add(textPane);
+        panelDerecho.setBackground(new Color(173, 216, 230));
 
         cardLayout.show(panelDerecho, "Inicio"); // Mostrar el panel "Inicio" al inicio
 

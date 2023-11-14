@@ -34,6 +34,7 @@ private JLabel consultaLabel;
         
         // Nuevo panel para los CheckBox de los atributos
         panelAtributos = new JPanel();
+        panelAtributos.setBackground(new Color(173, 216, 230));
         panelAtributos.setLayout(new BoxLayout(panelAtributos, BoxLayout.Y_AXIS));
 
         // Agregar el panel al panel izquierdo
