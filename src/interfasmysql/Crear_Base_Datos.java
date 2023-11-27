@@ -1,5 +1,8 @@
 package interfasmysql;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,6 +11,7 @@ import java.awt.event.ActionListener;
 import packeteria.Paqueteria;
 
 public class Crear_Base_Datos extends JPanel {
+<<<<<<< HEAD
 
     private JTextField txtNombreBd;
 
@@ -43,11 +47,37 @@ public class Crear_Base_Datos extends JPanel {
         // Agregar el panel de creación al centro del JPanel
         setLayout(new GridBagLayout());
         add(panelCreacion, new GridBagConstraints());
+=======
+    private JTextField txtNombreBd;
+
+    public Crear_Base_Datos(Inicio inicio) {
+       
+
+        // Crear un panel para los componentes de creación de base de datos con disposición BoxLayout vertical
+        JPanel panelCreacion = new JPanel();
+       panelCreacion.setBackground(new Color(120,170,255));
+        panelCreacion.setLayout(new BoxLayout(panelCreacion, BoxLayout.Y_AXIS));
+       
+
+        // Crear etiqueta y campo de texto para el nombre de la base de datos
+        JLabel lblNombreBd = new JLabel("Nombre de la Base de Datos:");
+        txtNombreBd = new JTextField(20);
+        panelCreacion.add(lblNombreBd);
+        panelCreacion.add(txtNombreBd);
+
+        // Crear el botón "Crear" para crear la base de datos
+        JButton btnCrearBd = new JButton("Crear");
+        panelCreacion.add(btnCrearBd);
+
+        // Agregar el panel de creación a la ventana de Crear_Base_Datos
+        add(panelCreacion);
+>>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
 
         // Agregar un ActionListener al botón "Crear"
         btnCrearBd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Obtener el nombre de la base de datos desde el campo de texto
+<<<<<<< HEAD
                 String nombreBd = txtNombreBd.getText().trim(); // Trim para eliminar espacios en blanco
 
                 // Verificar que el nombre de la base de datos no esté vacío
@@ -76,6 +106,21 @@ public class Crear_Base_Datos extends JPanel {
                         ex.printStackTrace(); // Puedes eliminar esta línea en un entorno de producción
                     }
                 }
+=======
+                String nombreBd = txtNombreBd.getText();
+
+                // Crear una instancia de Paqueteria
+                int tu_puerto = 3306; // Reemplaza 3306 con el número de puerto correcto
+                Paqueteria paqueteria = new Paqueteria("localhost", "root","", 3306);
+
+                // Llama al método crearBd con el nombre de la base de datos
+                paqueteria.crearBd(nombreBd);
+
+                // Muestra un mensaje emergente
+                JOptionPane.showMessageDialog(Crear_Base_Datos.this, "La base de datos '" + nombreBd + "' ha sido creada.", "Base de Datos Creada", JOptionPane.INFORMATION_MESSAGE);
+
+                // Cierra la ventana de Crear_Base_Datos
+>>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
             }
         });
 
@@ -85,7 +130,14 @@ public class Crear_Base_Datos extends JPanel {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
+<<<<<<< HEAD
             // Agrega aquí la inicialización de la ventana si es necesario
         });
     }
 }
+=======
+        });
+    }
+}
+
+>>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84

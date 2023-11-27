@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/wwwja/OneDrive/Documentos/menuSQLJ/BunnyDB-main/BunnyDB-main/src/interfasmysql/Bases_Datos_desc.java</file>
             <file>file:/C:/Users/wwwja/OneDrive/Documentos/menuSQLJ/BunnyDB-main/BunnyDB-main/src/interfasmysql/TablaRegistros.java</file>
@@ -10,5 +11,8 @@
             <file>file:/C:/Users/wwwja/OneDrive/Documentos/menuSQLJ/BunnyDB-main/BunnyDB-main/src/interfasmysql/Crear_Base_Datos.java</file>
             <file>file:/C:/Users/wwwja/OneDrive/Documentos/menuSQLJ/BunnyDB-main/BunnyDB-main/src/interfasmysql/tablas.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
     </open-files>
 </project-private>
