@@ -18,11 +18,7 @@ public class tablas extends JFrame {
         // Configuración de la ventana "Administrar Tablas"
         setTitle("Administrar Tablas");
         setSize(400, 200);
-<<<<<<< HEAD
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-=======
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
->>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
 
         // Crear un panel para los componentes
         JPanel panel = new JPanel();
@@ -33,11 +29,7 @@ public class tablas extends JFrame {
         bdComboBox = new JComboBox<>();
 
         // Obtén la lista de bases de datos desde la clase Paqueteria
-<<<<<<< HEAD
         Paqueteria paqueteria = new Paqueteria("localhost", "root", "", 3307); // Ajusta estos valores
-=======
-        Paqueteria paqueteria = new Paqueteria("localhost", "root", "", 3306); // Ajusta estos valores
->>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
         DefaultComboBoxModel<String> bdComboBoxModel = new DefaultComboBoxModel<>();
         for (String bd : paqueteria.listarBasesDeDatos()) {
             bdComboBoxModel.addElement(bd);
@@ -101,11 +93,7 @@ public class tablas extends JFrame {
 
         // Crear la tabla en la base de datos
         String baseDeDatos = bdComboBox.getSelectedItem().toString();
-<<<<<<< HEAD
         Paqueteria paqueteria = new Paqueteria("localhost", "root", "", 3307); // Ajusta estos valores
-=======
-        Paqueteria paqueteria = new Paqueteria("localhost", "root", "", 3306); // Ajusta estos valores
->>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
         Connection conexion = paqueteria.getConexion();
 
         if (conexion != null) {
@@ -120,11 +108,7 @@ public class tablas extends JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error al crear la tabla: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
-<<<<<<< HEAD
                 
-=======
-                paqueteria.desconectar(conexion);
->>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
             }
         }
     }

@@ -17,11 +17,7 @@ public class IngresarRegistroDialog extends JDialog {
         super(parent, "Ingresar Registro", true);
         this.nombreBd = nombreBd;
         this.nombreTabla = nombreTabla;
-<<<<<<< HEAD
         this.paqueteria = new Paqueteria("localhost", "root", "", 3307); // Ajusta estos valores
-=======
-        this.paqueteria = new Paqueteria("localhost", "root", "", 3306); // Ajusta estos valores
->>>>>>> 363d3d0b72261fcf0f5f64bf83c8b0ed4b559d84
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(0, 2, 10, 10));
