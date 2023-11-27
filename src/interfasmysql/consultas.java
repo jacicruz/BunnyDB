@@ -1,5 +1,7 @@
 package interfasmysql;
+
 import packeteria.Paqueteria;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -31,16 +33,9 @@ public class consultas extends JPanel {
         setBackground(new Color(240, 240, 240)); // Fondo gris claro
 
         // Panel para los componentes en la línea superior
-        JPanel topPanel = new JPanel(new FlowLayout());
+        JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(new Color(65, 105, 225)); // Azul real
         topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        // Componentes para seleccionar la tabla
-        tablaComboBox = new JComboBox<>();
-        tablaComboBox.setBackground(new Color(255, 255, 255));
-        tablaComboBox.setForeground(Color.black);
-        tablaComboBox.setPreferredSize(new Dimension(150, 30));
-        topPanel.add(tablaComboBox);
 
         // Texto para la consulta
         consultaTextField = new JTextField();
@@ -50,7 +45,14 @@ public class consultas extends JPanel {
         consultaTextField.setBackground(new Color(255, 255, 255));
         consultaTextField.setEditable(false);
         consultaTextField.setForeground(Color.black);
-        topPanel.add(consultaTextField);
+        topPanel.add(consultaTextField, BorderLayout.CENTER);
+
+        // Componentes para seleccionar la tabla
+        tablaComboBox = new JComboBox<>();
+        tablaComboBox.setBackground(new Color(255, 255, 255));
+        tablaComboBox.setForeground(Color.black);
+        tablaComboBox.setPreferredSize(new Dimension(150, 30));
+        topPanel.add(tablaComboBox, BorderLayout.SOUTH);
 
         // Agregar el panel superior al BorderLayout
         add(topPanel, BorderLayout.NORTH);

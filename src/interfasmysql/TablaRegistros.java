@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.table.JTableHeader;
 
 public class TablaRegistros extends JFrame {
     private DefaultTableModel tableModel;
@@ -18,12 +19,12 @@ public class TablaRegistros extends JFrame {
     private Paqueteria paqueteria;
     private String nombreBd;
     private String nombreTabla;
-    private JButton agregarRegistroButton; // Botón de agregar registro
-    private JButton eliminarRegistroButton; // Botón de eliminar registro
-    private JButton actualizarRegistroButton; // Botón de actualizar registro
-    private JLabel consultaLabel; // Label para mostrar la consulta
+    private JButton agregarRegistroButton;
+    private JButton eliminarRegistroButton;
+    private JButton actualizarRegistroButton;
+    private JLabel consultaLabel;
 
-    public TablaRegistros(String nombreBd, String nombreTabla) {
+   public TablaRegistros(String nombreBd, String nombreTabla) {
         this.nombreBd = nombreBd;
         this.nombreTabla = nombreTabla;
 
@@ -34,9 +35,8 @@ public class TablaRegistros extends JFrame {
 
         paqueteria = new Paqueteria("localhost", "root", "", 3307);
 
-        // Crear el panel principal con un color de fondo morado claro
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBackground(new Color(255,237,139)); // Morado claro
+        panel.setBackground(new Color(70, 130, 180)); // Fondo azul oscuro
 
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
@@ -46,19 +46,24 @@ public class TablaRegistros extends JFrame {
 
         agregarRegistroButton = new JButton("Agregar Registro");
         eliminarRegistroButton = new JButton("Eliminar Registro");
-        actualizarRegistroButton = new JButton("Actualizar Registro"); // Botón de actualizar registro
+        actualizarRegistroButton = new JButton("Actualizar Registro");
         consultaLabel = new JLabel("Consulta: ");
 
-        consultaLabel.setFont(new Font("Times new roman", Font.BOLD, 20)); // Fuente en negrita y tamaño 20
-        consultaLabel.setForeground(new Color(0,0,0)); // Color verde claro
+        consultaLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        consultaLabel.setForeground(new Color(0, 0, 0));
 
         JPanel buttonsPanel = new JPanel(new GridLayout(3, 1));
         buttonsPanel.add(agregarRegistroButton);
         buttonsPanel.add(eliminarRegistroButton);
-        buttonsPanel.add(actualizarRegistroButton); // Agregar el botón al panel de botones
+        buttonsPanel.add(actualizarRegistroButton);
 
         panel.add(buttonsPanel, BorderLayout.SOUTH);
         panel.add(consultaLabel, BorderLayout.NORTH);
+
+        // Configurar color del encabezado de la tabla
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(new Color(30, 144, 255)); // Azul real más oscuro
+        header.setForeground(Color.white);
 
         agregarRegistroButton.addActionListener(new ActionListener() {
             @Override
@@ -74,7 +79,6 @@ public class TablaRegistros extends JFrame {
             }
         });
 
-        // Agregar ActionListener para el botón de "Actualizar Registro"
         actualizarRegistroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,122 +111,111 @@ public class TablaRegistros extends JFrame {
                 }
             }
         });
+    }
 
+    private void agregarNuevoRegistro() {
+        try {
+            String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
+            String[] nuevoRegistro = new String[columnNames.length];
 
-    }   
-private void agregarNuevoRegistro() {
-        // Obtener los nombres de las columnas
-        String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
+            for (int i = 0; i < columnNames.length; i++) {
+                String valor = JOptionPane.showInputDialog("Ingrese el valor para " + columnNames[i]);
+                nuevoRegistro[i] = valor;
+            }
 
-        // Crear un nuevo objeto para almacenar los datos del nuevo registro
-        String[] nuevoRegistro = new String[columnNames.length];
+            boolean exitoso = paqueteria.insertarRegistro(nombreBd, nombreTabla, nuevoRegistro);
 
-        // Puedes abrir un cuadro de diálogo para que el usuario ingrese los valores,
-        // o puedes implementar la lógica según tus necesidades.
-
-        // Ejemplo: abrir un cuadro de diálogo para ingresar los valores
-        for (int i = 0; i < columnNames.length; i++) {
-            String valor = JOptionPane.showInputDialog("Ingrese el valor para " + columnNames[i]);
-            nuevoRegistro[i] = valor;
-        }
-
-        // Guardar el nuevo registro en la base de datos
-        boolean exitoso = paqueteria.insertarRegistro(nombreBd, nombreTabla, nuevoRegistro);
-
-        // Si la inserción fue exitosa, agrega el nuevo registro a la tabla
-        if (exitoso) {
-            tableModel.addRow(nuevoRegistro);
-            // Mostrar la consulta en el label
-            consultaLabel.setText("Consulta: INSERT INTO " + nombreTabla + " VALUES (" + String.join(", ", nuevoRegistro) + ")");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al insertar el nuevo registro.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (exitoso) {
+                tableModel.addRow(nuevoRegistro);
+                consultaLabel.setText("Consulta: INSERT INTO " + nombreTabla + " VALUES (" + String.join(", ", nuevoRegistro) + ")");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al insertar el nuevo registro.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al ingresar datos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-   private void eliminarRegistroSeleccionado() {
-    int selectedRow = table.getSelectedRow();
-    if (selectedRow >= 0) {
-        int modelRow = table.convertRowIndexToModel(selectedRow);
-        String[] rowData = new String[tableModel.getColumnCount()];
-        for (int col = 0; col < tableModel.getColumnCount(); col++) {
-            rowData[col] = (String) tableModel.getValueAt(modelRow, col);
-        }
-        boolean exitoso = paqueteria.eliminarRegistro(nombreBd, nombreTabla, rowData);
-        if (exitoso) {
-            tableModel.removeRow(modelRow);
-            // Mostrar la consulta de eliminar completa en el label
-            consultaLabel.setText("Consulta: " + construirConsultaEliminar(rowData));
-        } else {
+    private void eliminarRegistroSeleccionado() {
+        try {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow >= 0) {
+                int modelRow = table.convertRowIndexToModel(selectedRow);
+                String[] rowData = new String[tableModel.getColumnCount()];
+                for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                    rowData[col] = (String) tableModel.getValueAt(modelRow, col);
+                }
+                boolean exitoso = paqueteria.eliminarRegistro(nombreBd, nombreTabla, rowData);
+                if (exitoso) {
+                    tableModel.removeRow(modelRow);
+                    consultaLabel.setText("Consulta: " + construirConsultaEliminar(rowData));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al eliminar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al eliminar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para eliminar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
     }
-}
-
 
     private void actualizarRegistroSeleccionado() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow >= 0) {
-            int modelRow = table.convertRowIndexToModel(selectedRow);
-            String[] rowData = new String[tableModel.getColumnCount()];
-            for (int col = 0; col < tableModel.getColumnCount(); col++) {
-                rowData[col] = (String) tableModel.getValueAt(modelRow, col);
-            }
-            // Añadir el código necesario para abrir un cuadro de diálogo o
-            // utilizar la lógica que necesites para obtener los nuevos valores
-            // para actualizar el registro.
-            String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
-            String[] newValues = new String[columnNames.length];
-            for (int i = 0; i < columnNames.length; i++) {
-                String newValue = JOptionPane.showInputDialog("Ingrese el nuevo valor para " + columnNames[i]);
-                newValues[i] = newValue;
-            }
-            // Construir la condición WHERE (puedes personalizar según tus necesidades)
-            String condition = columnNames[0] + " = '" + rowData[0] + "'";
-            // Actualizar el registro en la base de datos
-            boolean exitoso = paqueteria.actualizarRegistro(nombreBd, nombreTabla, columnNames, newValues, condition);
-            if (exitoso) {
-                // Actualizar los datos en la tabla
+        try {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow >= 0) {
+                int modelRow = table.convertRowIndexToModel(selectedRow);
+                String[] rowData = new String[tableModel.getColumnCount()];
                 for (int col = 0; col < tableModel.getColumnCount(); col++) {
-                    tableModel.setValueAt(newValues[col], modelRow, col);
+                    rowData[col] = (String) tableModel.getValueAt(modelRow, col);
                 }
-                // Mostrar la consulta de actualizar completa en el label
-                consultaLabel.setText("Consulta: " + construirConsultaActualizar(rowData, newValues, condition));
+
+                String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
+                String[] newValues = new String[columnNames.length];
+                for (int i = 0; i < columnNames.length; i++) {
+                    String newValue = JOptionPane.showInputDialog("Ingrese el nuevo valor para " + columnNames[i]);
+                    newValues[i] = newValue;
+                }
+
+                String condition = columnNames[0] + " = '" + rowData[0] + "'";
+                boolean exitoso = paqueteria.actualizarRegistro(nombreBd, nombreTabla, columnNames, newValues, condition);
+
+                if (exitoso) {
+                    for (int col = 0; col < tableModel.getColumnCount(); col++) {
+                        tableModel.setValueAt(newValues[col], modelRow, col);
+                    }
+                    consultaLabel.setText("Consulta: " + construirConsultaActualizar(rowData, newValues, condition));
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al actualizar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Error al actualizar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para actualizar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione un registro para actualizar.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el registro.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    // Método para construir la consulta de eliminar completa
-   private String construirConsultaEliminar(String[] rowData) {
-    StringBuilder deleteQuery = new StringBuilder("DELETE FROM ");
-    deleteQuery.append(nombreBd).append(".").append(nombreTabla).append(" WHERE ");
+    private String construirConsultaEliminar(String[] rowData) {
+        StringBuilder deleteQuery = new StringBuilder("DELETE FROM ");
+        deleteQuery.append(nombreBd).append(".").append(nombreTabla).append(" WHERE ");
 
-    String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
+        String[] columnNames = paqueteria.obtenerNombresColumnas(nombreBd, nombreTabla);
 
-    for (int i = 0; i < columnNames.length; i++) {
-        deleteQuery.append(columnNames[i]).append(" = '").append(rowData[i]).append("'");
-        if (i < columnNames.length - 1) {
-            deleteQuery.append(" AND ");
+        for (int i = 0; i < columnNames.length; i++) {
+            deleteQuery.append(columnNames[i]).append(" = '").append(rowData[i]).append("'");
+            if (i < columnNames.length - 1) {
+                deleteQuery.append(" AND ");
+            }
         }
+
+        return deleteQuery.toString();
     }
 
-    return deleteQuery.toString();
-}
-   
-
-    // Método para construir la consulta de actualizar completa
     private String construirConsultaActualizar(String[] oldValues, String[] newValues, String condition) {
-        // Implementa la lógica según tus necesidades
-        // Por ejemplo: "UPDATE nombreTabla SET columna1 = nuevoValor1, columna2 = nuevoValor2 WHERE columna1 = valor1 AND ..."
         return "UPDATE " + nombreTabla + " SET " + construirSetClause(oldValues, newValues) + " WHERE " + condition;
     }
 
-    // Método para construir la cláusula SET de una consulta UPDATE
     private String construirSetClause(String[] oldValues, String[] newValues) {
         StringBuilder setClause = new StringBuilder();
         for (int i = 0; i < oldValues.length; i++) {
@@ -235,15 +228,18 @@ private void agregarNuevoRegistro() {
     }
 
     private void cargarDatos() {
-      List<String[]> registros = paqueteria.obtenerRegistros(nombreBd, nombreTabla);
-        for (String[] registro : registros) {
-            tableModel.addRow(registro);
+        try {
+            List<String[]> registros = paqueteria.obtenerRegistros(nombreBd, nombreTabla);
+            for (String[] registro : registros) {
+                tableModel.addRow(registro);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void mostrarMenuContextual(MouseEvent e) {
-        // Implementa la lógica del menú contextual aquí (si es necesario)
-        // ...
+        // Puedes implementar la lógica del menú contextual aquí si es necesario
     }
 
     public static void main(String[] args) {
@@ -253,4 +249,3 @@ private void agregarNuevoRegistro() {
         });
     }
 }
-  

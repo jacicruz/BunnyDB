@@ -18,7 +18,7 @@ public class tablas extends JFrame {
         // Configuración de la ventana "Administrar Tablas"
         setTitle("Administrar Tablas");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Crear un panel para los componentes
         JPanel panel = new JPanel();
@@ -108,7 +108,7 @@ public class tablas extends JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(this, "Error al crear la tabla: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             } finally {
-                paqueteria.desconectar(conexion);
+                
             }
         }
     }
