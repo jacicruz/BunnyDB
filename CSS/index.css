@@ -22,3 +22,35 @@ height: 100%;
 #juan{
     font-size: 80px;
 }
+
+
+#Usuario:focus{
+    border-color: blue;
+    border-width: 5px;
+    animation: rotacion 6s linear infinite;
+    animation-delay: -3s;
+}
+@keyframes rotacion {
+    0%   {border-color:red;}
+    25%  {border-color:yellow;}
+    50%  {border-color:blue;}
+    75%  {border-color:green;}
+    100% {border-color:red;}
+}
+
+#contraseña:focus{
+    border-color: blue;
+    border-width: 5px;
+    animation: rotacion 6s linear infinite;
+    animation-delay: -3s;
+}
+
+#boton:hover{
+    background-color: rgb(255, 11, 11);
+    border-color: rgb(255, 11, 11);
+    border-radius: 5px;
+    box-shadow: 0 0 5px #5bf403,
+                0 0 25px #5bf403,
+                0 0 50px #5bf403,
+                0 0 100px #5bf403;
+}
