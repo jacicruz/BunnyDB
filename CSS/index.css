@@ -51,6 +51,13 @@ height: 100%;
     animation: rotacion 6s linear infinite;
     animation-delay: -3s;
 }
+#Puerto:focus{
+  border-color: blue;
+  border-width: 5px;
+  animation: rotacion 6s linear infinite;
+  animation-delay: -3s;
+}
+
 @keyframes rotacion {
     0%   {border-color:red;}
     25%  {border-color:yellow;}
@@ -67,13 +74,13 @@ height: 100%;
 }
 
 #boton:hover{
-    background-color: rgb(255, 11, 11);
-    border-color: rgb(255, 11, 11);
+    background-color: rgb(11, 182, 255);
+    border-color: transparent;
     border-radius: 5px;
-    box-shadow: 0 0 5px #5bf403,
-                0 0 25px #5bf403,
-                0 0 50px #5bf403,
-                0 0 100px #5bf403;
+    box-shadow: 0 0 5px #03f4d4,
+                0 0 25px #03f4d4,
+                0 0 50px #03f4d4,
+                0 0 100px #03f4d4;
 }
 
 @keyframes señorconejo  {
