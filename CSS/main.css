@@ -1,3 +1,12 @@
 nav, .offcanvas{
     background-color: #1e293b;
 }
+
+.base{
+    margin-top: 30px;
+    padding: 5%;
+}
+
+body{
+    background-color: black;
+}

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BunnyDB</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/main.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../CSS/basesdedatos.css'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
@@ -15,7 +15,7 @@
    
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
-            <a href="" class="navbar-brand text-info fw-semibold fs-4">
+            <a href="main.html" class="navbar-brand text-info fw-semibold fs-4">
                 BunnyDB
             </a>
 
@@ -38,7 +38,7 @@
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">examinar</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">consultas</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">otros</a></li>
-                        <a href="../index.html" class="bi bi-bell px-1 text-info fs-2"></a>
+                        <i class="bi bi-bell px-1 text-info fs-2"></i>
                         <i class="bi bi-person-circle px-1 text-info fs-2"></i>
 
                         </ul>
@@ -53,48 +53,6 @@
             </section>
         </div>
     </nav>
-
-
-    <div class="container-fluid text-center py-3 juan">
-        <div class="row">
-        <div class="col"> 
-            <div class="card">
-                <img src=".." class="card-img-top" alt="...">
-              
-                <div class="card-body">
-                  <h5 class="card-title">Bienvenido</h5>
-                  <p class="card-text">BunnyDB el mas rapido y confiable gestor de base de datos</p>
-                  <a href="Loader2.html" class="btn btn-primary">Crear base de datos</a>
-                </div>
-              </div>
-        <div class="col-8"></div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card base">
-                  
-                    <div class="card-body">
-                      <h5 class="card-title">Personaliza tu experiencia</h5>
-                      <p class="card-text">Edita tu perfil y configura algunas caracteristicas del motor de base de datos que usas</p>
-                      <a href="#" class="btn btn-primary">Configuracion</a>
-                    </div>
-                  </div>
-                  
-            </div>
-             <div class="col">
-                <div class="card base">
-                  
-                    <div class="card-body">
-                      <h5 class="card-title">Tema</h5>
-                      <p class="card-text">Cambia entre el tema claro u oscuro</p>
-                      <button id="light-theme-btn" class="btn btn-primary">Claro</button>
-                      <button id="dark-theme-btn" class="btn btn-primary">Oscuro</button>
-                    </div>
-                  </div>
-                  
-            </div>
-        </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -119,6 +77,81 @@
         });
     </script>
 
+  
+<div class="container mt-5">
+    <form id="myForm">
+      <div class="form-group p-3" style="border: 1px solid #ccc; background-color: #f8f9fa;">
+        <label for="nombre">Nombre de la BD:</label>
+        <div class="d-flex justify-content-between">
+          <input type="text" class="form-control mb-3" id="nombre" placeholder="Ingrese el nombre de la BD" style="margin-right: 20px; background-color: #ffffff;">
+          
+          <!-- Combo box (lista desplegable) con espacio -->
+          <select class="form-control mb-3" id="tipoCotejamiento" style="margin-right: 20px; background-color: #ffffff;">
+            <option value="cotejamiento1">Cotejamiento 1</option>
+            <option value="cotejamiento2">Cotejamiento 2</option>
+            <!-- Agrega más opciones según sea necesario -->
+          </select>
+          
+          <button type="submit" class="btn btn-primary">Crear</button>
+
+        </div>
+      </div>
+  
+      <!-- Lista de bases de datos en una tabla -->
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cotejamiento</th>
+          </tr>
+        </thead>
+        <tbody id="tablaBDs"></tbody>
+      </table>
+    </form>
+</div>
+
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="../JS/script.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Agrega un evento de clic a las filas de la tabla
+      $('#tablaBDs').on('click', 'tr', function() {
+        // Obtiene el texto de la primera celda (nombre de la base de datos)
+        var nombreBD = $(this).find('td:first').text();
+
+        // Muestra un toast con el nombre de la base de datos
+        mostrarToast(nombreBD);
+      });
+
+      // Función para mostrar un toast
+      function mostrarToast(nombreBD) {
+        // Crea un nuevo objeto de toast usando Bootstrap
+        var toast = $('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: absolute; top: 0; right: 0;">\
+                        <div class="toast-header" style="background-color: #00f919ab ; color: #000000;">\
+                          <strong class="mr-auto">Base de Datos Seleccionada</strong>\
+                        </div>\
+                        <div class="toast-body">' + nombreBD + '</div>\
+                      </div>');
+
+        // Agrega el toast al cuerpo del documento
+        $('body').append(toast);
+
+        // Muestra el toast
+        toast.toast('show');
+
+        // Cierra automáticamente el toast después de 3 segundos
+        setTimeout(function() {
+          toast.toast('hide');
+        }, 3000);
+      }
+    });
+  </script>
+  
 </body>
 
 </html>

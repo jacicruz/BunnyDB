@@ -1,0 +1,35 @@
+/* Agrega estilos CSS para la tabla y las filas */
+.table-bordered {
+    border: 2px solid #ccc;
+    /* Borde de la tabla */
+    margin-top: 20px;
+    /* Separación superior */
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd;
+    /* Borde de las celdas */
+}
+
+/* Cambia el color de fondo y el texto al pasar el mouse sobre las filas */
+.table tbody tr:hover {
+    background-color: #007bff;
+    /* Fondo azul al pasar el mouse */
+    color: #ffffff;
+    /* Texto blanco al pasar el mouse */
+}
+
+nav,
+.offcanvas {
+    background-color: #1e293b;
+}
+
+.base {
+    margin-top: 30px;
+    padding: 5%;
+}
+
+body {
+    background-color: black;
+}
