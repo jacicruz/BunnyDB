@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-   
+
     <nav class="navbar navbar-expand-lg navbar-dark ">
         <div class="container-fluid">
             <a href="main.html" class="navbar-brand text-info fw-semibold fs-4">
@@ -35,20 +35,20 @@
                 <div class="offcanvas-body d.flex flex-column justify-content-between px-0">
                     <ul class="navbar-nav fs-5 justify-content-evenly">
                         <li class="nav-item p-3 py-md-1"><a href="../HTML/basesdedatos.html" class="nav-link">bases de datos</a></li>
-                        <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">examinar</a></li>
+                        <li class="nav-item p-3 py-md-1"><a href="../HTML/examinar.html" class="nav-link">examinar</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">consultas</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">otros</a></li>
                         <i class="bi bi-bell px-1 text-info fs-2"></i>
                         <i class="bi bi-person-circle px-1 text-info fs-2"></i>
 
-                        </ul>
+                    </ul>
 
                     <div class="d-lg-none align-self-center py-3">
                         <a href=""><i class="bi bi-twitter-x px-2 text-info fs-2"></i></a>
                         <a href=""><i class="bi bi-facebook px-2 text-info fs-2"></i></a>
                         <a href=""><i class="bi bi-github px-2 text-info fs-2"></i> </a>
                         <a href=""><i class="bi bi-whatsapp px-2 text-info fs-2"></i> </a>
-                    </div>                    
+                    </div>
                 </div>
             </section>
         </div>
@@ -59,99 +59,46 @@
         crossorigin="anonymous">
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const lightThemeBtn = document.getElementById('light-theme-btn');
-            const darkThemeBtn = document.getElementById('dark-theme-btn');
-            const body = document.body;
-    
-            // Manejar el clic en el botón de tema claro
-            lightThemeBtn.addEventListener('click', function () {
-                body.classList.remove('bg-dark', 'text-light');
-            });
-    
-            // Manejar el clic en el botón de tema oscuro
-            darkThemeBtn.addEventListener('click', function () {
-                body.classList.add('bg-dark', 'text-light');
-            });
-        });
-    </script>
+    <div class="container mt-5">
+        <form id="myForm">
+            <div class="form-group p-3" style="border: 1px solid #ccc; background-color: #f8f9fa;">
+                <label for="nombre">Nombre de la BD:</label>
+                <div class="d-flex justify-content-between">
+                    <input type="text" class="form-control mb-3" id="nombre" placeholder="Ingrese el nombre de la BD"
+                        style="margin-right: 20px; background-color: #ffffff;">
 
-  
-<div class="container mt-5">
-    <form id="myForm">
-      <div class="form-group p-3" style="border: 1px solid #ccc; background-color: #f8f9fa;">
-        <label for="nombre">Nombre de la BD:</label>
-        <div class="d-flex justify-content-between">
-          <input type="text" class="form-control mb-3" id="nombre" placeholder="Ingrese el nombre de la BD" style="margin-right: 20px; background-color: #ffffff;">
-          
-          <!-- Combo box (lista desplegable) con espacio -->
-          <select class="form-control mb-3" id="tipoCotejamiento" style="margin-right: 20px; background-color: #ffffff;">
-            <option value="cotejamiento1">Cotejamiento 1</option>
-            <option value="cotejamiento2">Cotejamiento 2</option>
-            <!-- Agrega más opciones según sea necesario -->
-          </select>
-          
-          <button type="submit" class="btn btn-primary">Crear</button>
+                    <!-- Combo box (lista desplegable) con espacio -->
+                    <select class="form-control mb-3" id="tipoCotejamiento"
+                        style="margin-right: 20px; background-color: #ffffff;">
+                        <option value="cotejamiento1">Cotejamiento 1</option>
+                        <option value="cotejamiento2">Cotejamiento 2</option>
+                        <!-- Agrega más opciones según sea necesario -->
+                    </select>
 
-        </div>
-      </div>
-  
-      <!-- Lista de bases de datos en una tabla -->
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Cotejamiento</th>
-          </tr>
-        </thead>
-        <tbody id="tablaBDs"></tbody>
-      </table>
-    </form>
-</div>
+                    <button type="submit" class="btn btn-primary">Crear</button>
 
-  </div>
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="../JS/script.js"></script>
+                </div>
+            </div>
 
-  <script>
-    $(document).ready(function() {
-      // Agrega un evento de clic a las filas de la tabla
-      $('#tablaBDs').on('click', 'tr', function() {
-        // Obtiene el texto de la primera celda (nombre de la base de datos)
-        var nombreBD = $(this).find('td:first').text();
+            <!-- Lista de bases de datos en una tabla -->
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cotejamiento</th>
+                        <th scope="col">Acciones</th> <!-- Nueva columna para botones de acción -->
+                    </tr>
+                </thead>
+                <tbody id="tablaBDs"></tbody>
+            </table>
+        </form>
+    </div>
 
-        // Muestra un toast con el nombre de la base de datos
-        mostrarToast(nombreBD);
-      });
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="../JS/script.js"></script>
 
-      // Función para mostrar un toast
-      function mostrarToast(nombreBD) {
-        // Crea un nuevo objeto de toast usando Bootstrap
-        var toast = $('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: absolute; top: 0; right: 0;">\
-                        <div class="toast-header" style="background-color: #00f919ab ; color: #000000;">\
-                          <strong class="mr-auto">Base de Datos Seleccionada</strong>\
-                        </div>\
-                        <div class="toast-body">' + nombreBD + '</div>\
-                      </div>');
-
-        // Agrega el toast al cuerpo del documento
-        $('body').append(toast);
-
-        // Muestra el toast
-        toast.toast('show');
-
-        // Cierra automáticamente el toast después de 3 segundos
-        setTimeout(function() {
-          toast.toast('hide');
-        }, 3000);
-      }
-    });
-  </script>
-  
 </body>
 
 </html>

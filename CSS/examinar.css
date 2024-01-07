@@ -1,0 +1,21 @@
+nav, .offcanvas{
+    background-color: #1e293b;
+}
+
+.base{
+    margin-top: 30px;
+    padding: 5%;
+}
+
+body{
+    background-color: black;
+}
+.resaltado {
+    border: 5px solid #007bff; /* Cambia el color del borde según tus preferencias */
+}
+
+.resaltado:hover {
+    background-color: #3597ff; /* Cambia el color de fondo al pasar el mouse según tus preferencias */
+    color: #ffffff;
+}
+
