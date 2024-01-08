@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Examinar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../CSS/examinar.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Bootstrap CSS sin integridad -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CSS sin integridad -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-    <script src="../JS/examinar.js" ></script>
+    <!-- jQuery sin integridad -->
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <a href="" class="navbar-brand text-info fw-semibold fs-4">
                 BunnyDB
@@ -31,8 +35,10 @@
 
                 <div class="offcanvas-body d-flex flex-column justify-content-between px-0">
                     <ul class="navbar-nav fs-5 justify-content-evenly">
-                        <li class="nav-item p-3 py-md-1"><a href="../HTML/basesdedatos.html" class="nav-link">bases de datos</a></li>
-                        <li class="nav-item p-3 py-md-1"><a href="../HTML/examinar.html" class="nav-link">examinar</a></li>
+                        <li class="nav-item p-3 py-md-1"><a href="../HTML/basesdedatos.html" class="nav-link">bases de
+                                datos</a></li>
+                        <li class="nav-item p-3 py-md-1"><a href="../HTML/examinar.html" class="nav-link">examinar</a>
+                        </li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">consultas</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">otros</a></li>
                         <a href="../index.html" class="bi bi-bell px-1 text-info fs-2"></a>
@@ -44,7 +50,7 @@
                         <a href=""><i class="bi bi-facebook px-2 text-info fs-2"></i></a>
                         <a href=""><i class="bi bi-github px-2 text-info fs-2"></i></a>
                         <a href=""><i class="bi bi-whatsapp px-2 text-info fs-2"></i></a>
-                    </div>                    
+                    </div>
                 </div>
             </section>
         </div>
@@ -52,10 +58,63 @@
 
     <!-- Menú desplegable para las bases de datos -->
     <div class="container mt-3">
-        <select id="basesDropdown" class="form-select resaltado" aria-label="Bases de Datos">
-        </select>
+        <select id="basesDropdown" class="form-select resaltado" aria-label="Bases de Datos"></select>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- Contenedor para mostrar tablas y botones -->
+    <div class="container mt-3" id="tablasContainer">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3>Tablas</h3>
+            <!-- Botón "Mostrar Formulario" al lado del título -->
+            <button id="mostrarFormBtn" class="btn btn-primary">Crear tabla</button>
+        </div>
+        <div id="tablasList" class="mb-3"></div>
+    </div>
+
+    <div class="container mt-3">
+        <div id="agregarTablaForm" class="d-none my-3" style="margin-top: -30px; position: relative; z-index: 1;">
+            <div class="mb-3">
+                <label for="modalNombreTabla" class="form-label">Nombre de la Tabla</label>
+                <input type="text" class="form-control" id="modalNombreTabla" required>
+            </div>
+            <div class="mb-3">
+                <label for="modalTipoDato" class="form-label">Tipo de Dato</label>
+                <select class="form-select" id="modalTipoDato" required>
+                    <!-- Agrega opciones según tus necesidades -->
+                    <option value="texto">Texto</option>
+                    <option value="numero">Número</option>
+                    <!-- Agrega más opciones si es necesario -->
+                </select>
+            </div>
+            <div id="columnasSection">
+                <label class="form-label">Columnas</label>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Nombre de la Columna" id="nombreColumna">
+                </div>
+                <button type="button" class="btn btn-success" id="agregarColumnaBtn">Agregar Columna</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="modalLongitud" class="form-label">Longitud/Valor (opcional)</label>
+                <input type="text" class="form-control" id="modalLongitud">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="modalAutoincrementable">
+                <label class="form-check-label" for="modalAutoincrementable">Autoincrementable</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="modalNulo">
+                <label class="form-check-label" for="modalNulo">Puede ser Nulo</label>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="modalLlavePrimaria">
+                <label class="form-check-label" for="modalLlavePrimaria">Llave Primaria</label>
+            </div>
+            <button type="button" class="btn btn-success" id="guardarTablaBtn">Agregar Tabla</button>
+        </div>
+    </div>
+
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="../JS/examinar.js"></script>
 </html>
