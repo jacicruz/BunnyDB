@@ -39,7 +39,7 @@
                                 datos</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="../HTML/examinar.html" class="nav-link">examinar</a>
                         </li>
-                        <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">consultas</a></li>
+                        <li class="nav-item p-3 py-md-1"><a href="consultas.html" class="nav-link">consultas</a></li>
                         <li class="nav-item p-3 py-md-1"><a href="" class="nav-link">otros</a></li>
                         <a href="../index.html" class="bi bi-bell px-1 text-info fs-2"></a>
                         <i class="bi bi-person-circle px-1 text-info fs-2"></i>
@@ -72,47 +72,50 @@
     </div>
 
     <div class="container mt-3">
-        <div id="agregarTablaForm" class="d-none my-3" style="margin-top: -30px; position: relative; z-index: 1;">
-            <div class="mb-3">
-                <label for="modalNombreTabla" class="form-label">Nombre de la Tabla</label>
-                <input type="text" class="form-control" id="modalNombreTabla" required>
-            </div>
-            <div class="mb-3">
-                <label for="modalTipoDato" class="form-label">Tipo de Dato</label>
-                <select class="form-select" id="modalTipoDato" required>
-                    <!-- Agrega opciones según tus necesidades -->
-                    <option value="texto">Texto</option>
-                    <option value="numero">Número</option>
-                    <!-- Agrega más opciones si es necesario -->
-                </select>
-            </div>
-            <div id="columnasSection">
-                <label class="form-label">Columnas</label>
+        <div class="container mt-3">
+            <div id="agregarTablaForm" class="d-none my-3" style="margin-top: -30px; position: relative; z-index: 1;">
                 <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Nombre de la Columna" id="nombreColumna">
+                    <label for="modalNombreTabla" class="form-label">Nombre de la Tabla</label>
+                    <input type="text" class="form-control" id="modalNombreTabla" required>
                 </div>
-                <button type="button" class="btn btn-success" id="agregarColumnaBtn">Agregar Columna</button>
+                <div class="mb-3">
+                    <label for="modalTipoDato" class="form-label">Tipo de Dato</label>
+                    <select class="form-select" id="modalTipoDato" required>
+                        <!-- Agrega opciones según tus necesidades -->
+                        <option value="texto">Texto</option>
+                        <option value="numero">Número</option>
+                        <!-- Agrega más opciones si es necesario -->
+                    </select>
+                </div>
+                <div id="columnasSection">
+                    <label class="form-label">Columnas</label>
+                    <div id="columnasList" class="mb-3"></div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre de la Columna" id="nombreColumnaInput">
+                    </div>
+                    <button type="button" class="btn btn-success" id="agregarColumnaBtn">Agregar Columna</button>
+                    <button type="button" class="btn btn-danger" id="quitarColumnaBtn">Quitar Columna</button>
+                </div>
+                <div class="mb-3">
+                    <label for="modalLongitud" class="form-label">Longitud/Valor (opcional)</label>
+                    <input type="text" class="form-control" id="modalLongitud">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="modalAutoincrementable">
+                    <label class="form-check-label" for="modalAutoincrementable">Autoincrementable</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="modalNulo">
+                    <label class="form-check-label" for="modalNulo">Puede ser Nulo</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="modalLlavePrimaria">
+                    <label class="form-check-label" for="modalLlavePrimaria">Llave Primaria</label>
+                </div>
+                <button type="button" class="btn btn-success" id="guardarTablaBtn">Agregar Tabla</button>
             </div>
-
-            <div class="mb-3">
-                <label for="modalLongitud" class="form-label">Longitud/Valor (opcional)</label>
-                <input type="text" class="form-control" id="modalLongitud">
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="modalAutoincrementable">
-                <label class="form-check-label" for="modalAutoincrementable">Autoincrementable</label>
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="modalNulo">
-                <label class="form-check-label" for="modalNulo">Puede ser Nulo</label>
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="modalLlavePrimaria">
-                <label class="form-check-label" for="modalLlavePrimaria">Llave Primaria</label>
-            </div>
-            <button type="button" class="btn btn-success" id="guardarTablaBtn">Agregar Tabla</button>
         </div>
-    </div>
+        
 
 </body>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
