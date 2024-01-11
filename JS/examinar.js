@@ -157,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 <tr>
                     <th>Nombre</th>
                     <th>Tipo de Dato</th>
-                    <th>Longitud</th>
                     <th>Autoincrementable</th>
                     <th>Nulo</th>
                     <th>Llave Primaria</th>
@@ -173,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 fila.innerHTML = `
                     <td class="tabla-nombre" data-nombre="${tabla.nombre}">${tabla.nombre}</td>
                     <td>${tabla.tipoDato}</td>
-                    <td>${tabla.longitud}</td>
                     <td>${tabla.autoincrementable}</td>
                     <td>${tabla.nulo}</td>
                     <td>${tabla.llavePrimaria}</td>
@@ -205,15 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para agregar una nueva tabla
     function agregarTabla() {
         // Lógica para agregar una nueva tabla
-        // Puedes personalizar el formulario modal y la lógica según tus necesidades
-
-        // Ejemplo de obtener valores del formulario
-        var nombreTabla = modalNombreTabla.value;
-        var tipoDato = modalTipoDato.value;
-        var longitud = modalLongitud.value;
-        var autoincrementable = modalAutoincrementable.checked;
-        var nulo = modalNulo.checked;
-        var llavePrimaria = modalLlavePrimaria.checked;
+        // ...
 
         // Busca la base de datos seleccionada
         var selectedBD = basesDeDatos.find(function (bd) {
@@ -227,17 +217,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Puedes personalizar los detalles de la tabla según tus necesidades
         var nuevaTabla = {
-            nombre: nombreTabla,
-            tipoDato: tipoDato,
-            longitud: longitud,
-            autoincrementable: autoincrementable,
-            nulo: nulo,
-            llavePrimaria: llavePrimaria
+            nombre: modalNombreTabla.value,
+            tipoDato: modalTipoDato.value,
+            autoincrementable: modalAutoincrementable.checked,
+            nulo: modalNulo.checked,
+            llavePrimaria: modalLlavePrimaria.checked,
+            columnas: []  // Inicializa el array de columnas para esta tabla
         };
 
         selectedBD.tablas.push(nuevaTabla);
-
-        // Muestra las tablas actualizadas
+        // Refresca la lista de tablas
         mostrarTablas(selectedBD);
 
         // Guarda la base de datos actualizada en el localStorage
