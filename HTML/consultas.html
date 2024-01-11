@@ -55,7 +55,36 @@
             </section>
         </div>
     </nav>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Nombre de la Base de Datos (Izquierda) -->
+            <div class="col-md-6">
+                <h4>Base de Datos: <span id="nombreBD">Nombre_DB</span></h4>
+            </div>
 
+            <!-- Tablas (Derecha) -->
+            <div class="col-md-6">
+                <label for="tablasDropdown" class="form-label">Seleccionar Tabla:</label>
+                <select id="tablasDropdown" class="form-select">
+                    <!-- Opciones de tablas se llenarán dinámicamente con JavaScript -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Formulario para Actualizar Datos -->
+        <form id="actualizarDatosForm" class="mt-3">
+            <!-- Columnas se llenarán dinámicamente con JavaScript -->
+            <div id="columnasContainer" class="row">
+                <!-- Aquí se añadirán dinámicamente los campos para cada columna -->
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Actualizar Datos</button>
+        </form>
+
+        <script>
+            
+        </script>
 </body>
 </html>
  
